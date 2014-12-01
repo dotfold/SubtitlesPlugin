@@ -1,5 +1,8 @@
-package ru.kutu.osmf.subtitles {
-	
+package ru.kutu.osmf.subtitles.parser {
+
+	import ru.kutu.osmf.subtitles.*;
+	import ru.kutu.osmf.subtitles.model.SubtitlesVO;
+
 	public class SubRipParser {
 		
 		private static const rxSubRip:RegExp = /^\s*\d+\s*$(?:\r?\n?)+^\s*([\d:,\.]+)\s*-->\s*([\d:,\.]+)\s*$(?:\r?\n?)+((?:.*(?:\r?\n?)?)*?)(?:\r\n|\r|\n|$)/gm;

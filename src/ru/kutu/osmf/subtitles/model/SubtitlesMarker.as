@@ -1,4 +1,4 @@
-package ru.kutu.osmf.subtitles {
+package ru.kutu.osmf.subtitles.model {
 	
 	import org.osmf.metadata.TimelineMarker;
 	

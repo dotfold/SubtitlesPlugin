@@ -1,4 +1,6 @@
-package ru.kutu.osmf.subtitles  {
+package {
+
+	import ru.kutu.osmf.subtitles.*;
 	
 	import flash.display.Sprite;
 	

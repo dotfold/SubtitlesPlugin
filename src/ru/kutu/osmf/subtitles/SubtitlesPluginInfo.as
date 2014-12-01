@@ -15,7 +15,7 @@ package ru.kutu.osmf.subtitles {
 			var items:Vector.<MediaFactoryItem> = new Vector.<MediaFactoryItem>();
 			
 			var loader:NetLoader = new NetLoader();
-			items.push(new MediaFactoryItem("ru.kutu.osmf.subtitles.SubtitlesPlugin"
+			items.push(new MediaFactoryItem("SubtitlesPlugin"
 				, function(resource:MediaResourceBase):Boolean {
 					return resource.metadataNamespaceURLs.indexOf(NAMESPACE) != -1;
 				}

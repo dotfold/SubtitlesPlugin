@@ -1,4 +1,6 @@
-package ru.kutu.osmf.subtitles {
+package ru.kutu.osmf.subtitles.elements {
+
+	import ru.kutu.osmf.subtitles.*;
 	
 	import by.blooddy.crypto.serialization.JSON;
 	
@@ -9,7 +11,10 @@ package ru.kutu.osmf.subtitles {
 	import org.osmf.traits.LoadState;
 	import org.osmf.traits.LoadTrait;
 	import org.osmf.traits.MediaTraitType;
-	
+
+	import ru.kutu.osmf.subtitles.model.SubtitlesSourceItem;
+	import ru.kutu.osmf.subtitles.traits.SubtitlesTrait;
+
 	CONFIG::LOGGING {
 		import org.osmf.logging.Log;
 		import org.osmf.logging.Logger;
@@ -18,7 +23,7 @@ package ru.kutu.osmf.subtitles {
 	public class SubtitlesProxyElement extends ProxyElement {
 		
 		CONFIG::LOGGING {
-			private static const logger:Logger = Log.getLogger("ru.kutu.osmf.subtitles.SubtitlesProxyElement");
+			private static const logger:Logger = Log.getLogger("ru.kutu.osmf.subtitles.elements.SubtitlesProxyElement");
 		}
 		
 		private var mediaLoadTrait:LoadTrait;

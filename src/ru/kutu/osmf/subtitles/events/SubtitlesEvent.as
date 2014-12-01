@@ -1,4 +1,4 @@
-package ru.kutu.osmf.subtitles {
+package ru.kutu.osmf.subtitles.events {
 	
 	import flash.events.Event;
 	

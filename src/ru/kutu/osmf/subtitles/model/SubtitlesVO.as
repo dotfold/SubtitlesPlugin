@@ -1,5 +1,7 @@
-package ru.kutu.osmf.subtitles {
-	
+package ru.kutu.osmf.subtitles.model {
+
+	import ru.kutu.osmf.subtitles.model.SubtitlesItemVO;
+
 	public class SubtitlesVO {
 		
 		private var _items:Vector.<SubtitlesItemVO>;

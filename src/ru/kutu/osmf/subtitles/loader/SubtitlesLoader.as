@@ -1,4 +1,6 @@
-package ru.kutu.osmf.subtitles {
+package ru.kutu.osmf.subtitles.loader {
+
+	import ru.kutu.osmf.subtitles.*;
 	
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
@@ -17,7 +19,9 @@ package ru.kutu.osmf.subtitles {
 	import org.osmf.traits.LoadTrait;
 	import org.osmf.traits.LoaderBase;
 	import org.osmf.utils.OSMFSettings;
-	
+
+	import ru.kutu.osmf.subtitles.parser.SubRipParser;
+
 	CONFIG::LOGGING {
 		import org.osmf.logging.Log;
 		import org.osmf.logging.Logger;
@@ -26,7 +30,7 @@ package ru.kutu.osmf.subtitles {
 	public class SubtitlesLoader extends LoaderBase {
 		
 		CONFIG::LOGGING {
-			private static const logger:Logger = Log.getLogger("ru.kutu.osmf.subtitles.SubtitlesLoader");
+			private static const logger:Logger = Log.getLogger("ru.kutu.osmf.subtitles.loader.SubtitlesLoader");
 		}
 		
 		private var retryTimeout:uint;

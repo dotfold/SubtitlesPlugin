@@ -1,4 +1,4 @@
-package ru.kutu.osmf.subtitles {
+package ru.kutu.osmf.subtitles.traits {
 	
 	import org.osmf.events.LoadEvent;
 	import org.osmf.media.MediaElement;
@@ -6,8 +6,15 @@ package ru.kutu.osmf.subtitles {
 	import org.osmf.metadata.TimelineMetadata;
 	import org.osmf.traits.LoadState;
 	import org.osmf.traits.MediaTraitBase;
-	
-	[Event(name="subtitlesSwitchingChange", type="ru.kutu.osmf.subtitles.SubtitlesEvent")]
+
+	import ru.kutu.osmf.subtitles.events.SubtitlesEvent;
+	import ru.kutu.osmf.subtitles.loader.SubtitlesLoadTrait;
+	import ru.kutu.osmf.subtitles.loader.SubtitlesLoader;
+	import ru.kutu.osmf.subtitles.model.SubtitlesItemVO;
+	import ru.kutu.osmf.subtitles.model.SubtitlesSourceItem;
+	import ru.kutu.osmf.subtitles.model.SubtitlesVO;
+
+	[Event(name="subtitlesSwitchingChange", type="ru.kutu.osmf.subtitles.events.SubtitlesEvent")]
 	
 	public class SubtitlesTrait extends MediaTraitBase {
 		

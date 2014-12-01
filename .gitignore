@@ -4,7 +4,6 @@
 .flexLibProperties
 .project
 bin
-libs
 out
 .idea
 *iml

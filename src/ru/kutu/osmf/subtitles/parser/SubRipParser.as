@@ -1,6 +1,7 @@
 package ru.kutu.osmf.subtitles.parser {
 
 	import ru.kutu.osmf.subtitles.*;
+	import ru.kutu.osmf.subtitles.model.SubtitlesItemVO;
 	import ru.kutu.osmf.subtitles.model.SubtitlesVO;
 
 	public class SubRipParser {

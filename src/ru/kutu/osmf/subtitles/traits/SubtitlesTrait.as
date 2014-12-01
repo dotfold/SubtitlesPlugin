@@ -11,6 +11,7 @@ package ru.kutu.osmf.subtitles.traits {
 	import ru.kutu.osmf.subtitles.loader.SubtitlesLoadTrait;
 	import ru.kutu.osmf.subtitles.loader.SubtitlesLoader;
 	import ru.kutu.osmf.subtitles.model.SubtitlesItemVO;
+	import ru.kutu.osmf.subtitles.model.SubtitlesMarker;
 	import ru.kutu.osmf.subtitles.model.SubtitlesSourceItem;
 	import ru.kutu.osmf.subtitles.model.SubtitlesVO;
 

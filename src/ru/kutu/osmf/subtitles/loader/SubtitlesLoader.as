@@ -1,4 +1,5 @@
-package ru.kutu.osmf.subtitles.loader {
+package ru.kutu.osmf.subtitles.loader
+{
 
 	import ru.kutu.osmf.subtitles.*;
 	
@@ -22,85 +23,117 @@ package ru.kutu.osmf.subtitles.loader {
 
 	import ru.kutu.osmf.subtitles.parser.SubRipParser;
 
-	CONFIG::LOGGING {
+	CONFIG::LOGGING
+	{
 		import org.osmf.logging.Log;
 		import org.osmf.logging.Logger;
 	}
 	
-	public class SubtitlesLoader extends LoaderBase {
+	public class SubtitlesLoader extends LoaderBase
+	{
 		
-		CONFIG::LOGGING {
+		CONFIG::LOGGING
+		{
 			private static const logger:Logger = Log.getLogger("ru.kutu.osmf.subtitles.loader.SubtitlesLoader");
 		}
 		
 		private var retryTimeout:uint;
 		
-		override public function canHandleResource(media:MediaResourceBase):Boolean {
+		override public function canHandleResource(media:MediaResourceBase):Boolean
+		{
 			return true;
 		}
 		
-		override protected function executeLoad(loadTrait:LoadTrait):void {
+		override protected function executeLoad(loadTrait:LoadTrait):void
+		{
 			updateLoadTrait(loadTrait, LoadState.LOADING);
 			
 			var resource:URLResource = loadTrait.resource as URLResource;
 			var req:URLRequest = new URLRequest(resource.url);
-			CONFIG::LOGGING {
+
+			CONFIG::LOGGING
+			{
 				logger.info("Start loading subtitles item: {0}", req.url);
 			}
+
 			var loader:URLLoader = new URLLoader(req);
 			
 			loader.addEventListener(Event.COMPLETE, onComplete);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onError);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onError);
 			
-			function removeListeners():void {
+			function removeListeners():void
+			{
 				loader.removeEventListener(Event.COMPLETE, onComplete);
 				loader.removeEventListener(IOErrorEvent.IO_ERROR, onError);
 				loader.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onError);
 			}
 			
 			var retries:uint = OSMFSettings.hdsMaximumRetries;
-			function onError(event:ErrorEvent):void {
-				CONFIG::LOGGING {
+			function onError(event:ErrorEvent):void
+			{
+				CONFIG::LOGGING
+				{
 					logger.info("Error occured while loading subtitles item: {0}: {1}", event.errorID, event.text);
 				}
+
 				retries--;
-				if (event is SecurityErrorEvent) {
+				if (event is SecurityErrorEvent)
+				{
 					retries = 0;
 				}
-				if (retries == 0) {
+				if (retries == 0)
+				{
 					removeListeners();
 					updateLoadTrait(loadTrait, LoadState.LOAD_ERROR);
 					var mediaError:MediaError = new MediaError(0, event.text);
 					mediaError.message = "Error occured while loading subtitles item";
 					loadTrait.dispatchEvent(new MediaErrorEvent(MediaErrorEvent.MEDIA_ERROR, false, false, mediaError));
-				} else {
-					CONFIG::LOGGING {
+				}
+				else
+				{
+					CONFIG::LOGGING
+					{
 						logger.info("Retry load subtitles item");
 					}
+
 					retryTimeout = setTimeout(loader.load, 1000, req);
 				}
 			}
 			
-			function onComplete(event:Event):void {
+			function onComplete(event:Event):void
+			{
 				removeListeners();
-				CONFIG::LOGGING {
+
+				CONFIG::LOGGING
+				{
 					logger.info("Subtitles item download succefully");
 				}
-				try {
-					CONFIG::LOGGING {
+
+				try
+				{
+					CONFIG::LOGGING
+					{
 						logger.info("Start parsing subtitles item");
 					}
+
 					var data:String = String((event.target as URLLoader).data);
 					SubtitlesLoadTrait(loadTrait).subtitlesVO = SubRipParser.parse(data);
-					CONFIG::LOGGING {
+
+					CONFIG::LOGGING
+					{
 						logger.info("Finish parsing subtitles item");
 					}
+
 					updateLoadTrait(loadTrait, LoadState.READY);
-				} catch (error:Error) {
-					CONFIG::LOGGING {
+				}
+				catch (error:Error)
+				{
+					CONFIG::LOGGING
+					{
 						logger.error("Error occured while parsing subtitles item {0}: {1}", error.errorID, error.message);
 					}
+
 					updateLoadTrait(loadTrait, LoadState.LOAD_ERROR);
 					var mediaError:MediaError = new MediaError(0, error.message);
 					mediaError.message = "Error occured while parsing subtitles item";
@@ -109,7 +142,8 @@ package ru.kutu.osmf.subtitles.loader {
 			}
 		}
 		
-		override protected function executeUnload(loadTrait:LoadTrait):void {
+		override protected function executeUnload(loadTrait:LoadTrait):void
+		{
 			clearTimeout(retryTimeout);
 			updateLoadTrait(loadTrait, LoadState.UNLOADING);			
 			updateLoadTrait(loadTrait, LoadState.UNINITIALIZED);
